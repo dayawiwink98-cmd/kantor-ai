@@ -17,11 +17,20 @@
         "kulit": "terang",
         "baju": "putih",
         "kacamata": false
+      },
+      {
+        "nama": "Bu Rukmi",
+        "gender": "wanita",
+        "rambut": "hijab",
+        "kulit": "sawo",
+        "baju": "cokelat",
+        "kacamata": false
       }
     ],
     "ringkasan": [
-      "Part 1: Bima dan Laras menyewa rumah nomor 13 yang murah. Setiap jam 03.00 pagi muncul ketukan di pintu depan yang jumlahnya bertambah tiap malam hingga tujuh kali. Bima memasang CCTV di ruang tamu dan terkejut melihat rekaman Laras mengetuk pintu dari dalam, padahal Laras asli tertidur di sampingnya."
+      "Part 1: Bima dan Laras menyewa rumah nomor 13 yang murah. Setiap jam 03.00 pagi muncul ketukan di pintu depan yang jumlahnya bertambah tiap malam hingga tujuh kali. Bima memasang CCTV di ruang tamu dan terkejut melihat rekaman Laras mengetuk pintu dari dalam, padahal Laras asli tertidur di sampingnya.",
+      "Part 2: Bima mengetahui dari Bu Rukmi bahwa rumah nomor 13 memiliki kutukan 'dua istri' bagi setiap penghuni pria sebelum mereka hilang. Pada malam ketiga belas, setelah 13 kali ketukan misterius berhenti, Laras tiba-tiba terbangun dan menyapa Bima dengan suara orang lain."
     ],
-    "cliffhanger": "Siapa sosok berwujud Laras yang mengetuk pintu dari dalam rumah?"
+    "cliffhanger": "Laras bangun, tersenyum seram, dan memanggil Bima menggunakan suara nenek tua."
   }
 }
