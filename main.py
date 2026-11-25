@@ -29,6 +29,7 @@ TTS_RATE = os.environ.get("TTS_RATE", "-6%")                     # sedikit lamba
 TTS_PITCH = os.environ.get("TTS_PITCH", "-6Hz")
 PRIVACY = os.environ.get("YT_PRIVACY", "private")                 # private / unlisted / public
 UPLOAD = os.environ.get("UPLOAD", "1") == "1" and not UJI
+SIMPAN = os.environ.get("SIMPAN_KEMAJUAN", "0") == "1" and not UJI   # maju ke part berikutnya walau tanpa upload
 WORK = Path("work")
 WORK.mkdir(exist_ok=True)
 TOPIK_CSV, STATE_JSON = Path("topics.csv"), Path("state.json")
@@ -431,6 +432,7 @@ def main():
 
     if UPLOAD:
         upload_youtube(final, naskah, row)
+    if UPLOAD or SIMPAN:
         s = st.setdefault(row["seri"], {})
         s["narator"] = naskah["narator"]
         s["tokoh"] = naskah["tokoh"]
