@@ -1,0 +1,11 @@
+topik,status
+Runtuhnya Majapahit dan misteri akhir kerajaan terbesar Nusantara,
+Sumpah Palapa Gajah Mada,
+Pertempuran Surabaya 10 November 1945,
+Jatuhnya Konstantinopel tahun 1453,
+Hilangnya Perpustakaan Alexandria,
+Perang Diponegoro dan taktik yang menyulitkan Belanda,
+Kerajaan Sriwijaya penguasa jalur laut,
+Mengapa Candi Borobudur sempat terkubur,
+Cornelis de Houtman dan awal kedatangan Belanda ke Nusantara,
+Kerajaan Romawi dan sebab keruntuhannya,
