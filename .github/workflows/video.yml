@@ -1,0 +1,38 @@
+name: Video horor bersambung
+
+on:
+  schedule:
+    - cron: "0 12 * * *"      # tiap hari 19:00 WIB; ubah sesuai selera
+  workflow_dispatch: {}
+
+permissions:
+  contents: write              # supaya topics.csv & state.json bisa di-commit balik
+
+jobs:
+  buat-video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Pasang FFmpeg dan font
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+      - run: pip install -r requirements.txt
+      - name: Buat dan unggah video
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_PRIVACY: private          # ganti public bila sudah puas dengan hasilnya
+          KANAL: TITIK SUNYI           # nama channel di pojok kiri atas video
+        run: python main.py
+      - name: Simpan kemajuan seri
+        run: |
+          git config user.name "video-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add topics.csv state.json
+          git diff --staged --quiet || git commit -m "Seri maju satu part" && git push
