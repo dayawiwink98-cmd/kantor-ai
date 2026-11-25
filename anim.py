@@ -20,7 +20,7 @@ W, H, FPS = 720, 1280, 30
 FONT = os.environ.get("FONT_PATH", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
 FONT_SERIF = os.environ.get("FONT_SERIF_PATH", "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf")
 FONT_MONO = os.environ.get("FONT_MONO_PATH", "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf")
-KANAL = os.environ.get("KANAL", "TITIK SUNYI")
+KANAL = os.environ.get("KANAL", "BISIK")
 
 LATAR = ["kamar_malam", "kamar_pagi", "dapur", "ruang_tamu", "lorong", "luar_malam", "rak_buku", "kamar_mandi", "gelap"]
 SHOT = ["lebar", "sedang", "closeup", "ranjang", "cctv", "cctv_zoom"]
