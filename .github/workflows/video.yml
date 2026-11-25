@@ -30,7 +30,7 @@ jobs:
           UPLOAD: "0"                  # ganti "1" setelah tiga secret YouTube diisi
           SIMPAN_KEMAJUAN: "1"         # seri tetap maju ke part berikutnya
           YT_PRIVACY: private
-          KANAL: TITIK SUNYI           # nama channel di pojok kiri atas video
+          KANAL: BISIK           # nama channel di pojok kiri atas video
         run: python main.py
       - name: Simpan video sebagai file unduhan
         uses: actions/upload-artifact@v4
