@@ -27,9 +27,17 @@ jobs:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
-          YT_PRIVACY: private          # ganti public bila sudah puas dengan hasilnya
+          UPLOAD: "0"                  # ganti "1" setelah tiga secret YouTube diisi
+          SIMPAN_KEMAJUAN: "1"         # seri tetap maju ke part berikutnya
+          YT_PRIVACY: private
           KANAL: TITIK SUNYI           # nama channel di pojok kiri atas video
         run: python main.py
+      - name: Simpan video sebagai file unduhan
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-${{ github.run_number }}
+          path: work/final.mp4
+          retention-days: 14
       - name: Simpan kemajuan seri
         run: |
           git config user.name "video-bot"
