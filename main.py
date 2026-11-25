@@ -17,7 +17,10 @@ import edge_tts
 import requests
 
 GEMINI_KEY = os.environ["GEMINI_API_KEY"]
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")  # ganti jika model ini sudah dipensiunkan
+# Daftar model dicoba berurutan; bila satu ditolak (404/429), lanjut ke berikutnya.
+# Bisa diganti lewat variabel GEMINI_MODEL (pisahkan dengan koma).
+GEMINI_MODELS = [m.strip() for m in os.environ.get(
+    "GEMINI_MODEL", "gemini-3.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
 VOICE = os.environ.get("TTS_VOICE", "id-ID-ArdiNeural")  # alternatif: id-ID-GadisNeural
 PRIVACY = os.environ.get("YT_PRIVACY", "private")  # private / unlisted / public
 UPLOAD = os.environ.get("UPLOAD", "1") == "1"
@@ -69,22 +72,28 @@ Aturan:
 Balas HANYA JSON dengan bentuk:
 {{"judul": "maks 70 karakter", "deskripsi": "2 kalimat", "tag": ["..."],
   "bagian": [{{"narasi": "...", "kata_kunci": "..."}}]}}"""
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
     body = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json", "temperature": 0.8},
     }
-    for percobaan in range(3):
-        try:
-            r = requests.post(url, params={"key": GEMINI_KEY}, json=body, timeout=120)
-            r.raise_for_status()
-            teks = r.json()["candidates"][0]["content"]["parts"][0]["text"]
-            data = json.loads(teks)
-            assert data["bagian"], "bagian kosong"
-            return data
-        except Exception as e:  # noqa: BLE001
-            print(f"Naskah gagal (percobaan {percobaan + 1}): {e}")
-            time.sleep(5)
+    for model in GEMINI_MODELS:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+        for percobaan in range(2):
+            try:
+                r = requests.post(url, params={"key": GEMINI_KEY}, json=body, timeout=120)
+                if r.status_code in (404, 429):  # model tidak ada / kuota habis -> coba model lain
+                    print(f"Model {model} ditolak (HTTP {r.status_code}), coba model berikutnya")
+                    break
+                r.raise_for_status()
+                bagian = r.json()["candidates"][0]["content"]["parts"]
+                teks = "".join(p.get("text", "") for p in bagian if not p.get("thought"))
+                data = json.loads(teks)
+                assert data["bagian"], "bagian kosong"
+                print("Naskah dibuat dengan model:", model)
+                return data
+            except Exception as e:  # noqa: BLE001
+                print(f"Naskah gagal ({model}, percobaan {percobaan + 1}): {e}")
+                time.sleep(5)
     sys.exit("Gagal membuat naskah.")
 
 
