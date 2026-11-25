@@ -559,7 +559,9 @@ def kamera(scene, t, total):
     cw, ch = W * z, H * z
     kiri = (W - cw) / 2 + 10 * math.sin(t * .5)
     atas = (H - ch) * .5
-    return bg.resize((W, H), Image.BILINEAR, box=(kiri, atas, kiri + cw, atas + ch))
+    kiri = max(0.0, min(kiri, W - cw))   # jaga agar bingkai tidak keluar dari gambar
+    atas = max(0.0, min(atas, H - ch))
+    return bg.resize((W, H), Image.BILINEAR, box=(kiri, atas, min(W, kiri + cw), min(H, atas + ch)))
 
 
 # ---------------------------------------------------------------- karakter kartun
