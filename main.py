@@ -1,4 +1,4 @@
-"""Cerita Horor Bersambung (animasi kartun, tanpa GPU) - gaya 'Titik Sunyi'.
+"""Cerita Horor Bersambung (animasi kartun, tanpa GPU) - gaya 'Bisik'.
 
 Alur: topics.csv (seri & part) -> naskah per adegan (Gemini, nyambung dengan part sebelumnya lewat state.json)
       -> suara (edge-tts, kata demi kata) -> animasi (anim.py) -> video (FFmpeg) -> upload YouTube.
